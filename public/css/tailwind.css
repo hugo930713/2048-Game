@@ -1,0 +1,43 @@
+@tailwind base; 
+@tailwind components; 
+@tailwind utilities;
+
+@layer components{
+    #game-board{
+        grid-template-columns:repeat(var(--grid-size),var(--square-size));
+        grid-template-rows:repeat(var(--grid-size),var(--square-size));
+        gap:var(--square-gap);
+        padding:var(--square-gap);
+    }
+}
+
+@layer utilities{
+    .animation-show{
+        animation-name: show;
+        animation-duration: 200ms;
+        animation-timing-function: east-in-out;
+    }
+}
+
+.square {
+    @apply bg-gray-400;
+    border-radius: 1vmin;
+}
+
+.tile {
+    @apply absolute flex justify-center items-center bg-blue-400 font-bold duration-100 ease-in-out rounded-[1vmin];
+    width: var(--square-size);
+    height: var(--square-size);
+    top: calc(var(--y) * (var(--square-size) + var(--square-gap)) + var(--square-gap));
+    left: calc(var(--x) * (var(--square-size) + var(--square-gap)) + var(--square-gap));
+    background-color: hsl(200, 50%, var(--background-lightness));
+    color: hsl(200, 25%, var(--text-lightness));
+    animation: show 200ms ease-in-out;
+}
+
+@keyframes show {
+    0% {
+        opacity: .5;
+        transform: scale(0);
+    }
+}
